@@ -1,6 +1,6 @@
 # MiniProject Golang CAP 2022
 
 
-# Project Component
+<h2> Project Component</h2>
 
 
