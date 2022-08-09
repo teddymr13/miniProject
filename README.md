@@ -91,12 +91,12 @@ VALUES
 
 ## Rest Api Inventory
 
-### POST Inventory
+### POST Inventory (CREATE)
 ```
 localhost:9000/inventory
 ```
 
-### BODY POST FOODS
+### Example Body POST Inventory
 ```
 {
     "name": "Asus ROG",
@@ -123,7 +123,7 @@ localhost:9000/inventory
 }
 ```
 
-### GET All Inventory
+### GET All Inventory (READ) 
 ```
 localhost:9000/inventory?page=1&limit=4
 ```
@@ -167,7 +167,7 @@ localhost:9000/inventory?page=1&limit=4
 }
 ```
 
-### GET By itemID Inventory
+### GET By itemID Inventory (READ BY ID)
 ```
 localhost:9000/inventory/1
 ```
@@ -187,27 +187,7 @@ localhost:9000/inventory/1
 }
 ```
 
-### PUT Inventory
-```
-localhost:9000/inventory/1
-```
-### Example Rest Api Get By itemID Inventory
-```
-{
-    "code": 200,
-    "message": "Success get data inventory by item id",
-    "data": "1"
-}{
-    "itemID": 1,
-    "name": "Asus Zenbook",
-    "categoryItem": "Laptop",
-    "stock": 110,
-    "price": 9000,
-    "status": "1"
-}
-```
-
-### PUT Inventory
+### PUT Inventory (UPDATE)
 ```
 localhost:9000/inventory/1
 ```
@@ -222,14 +202,14 @@ localhost:9000/inventory/1
 }
 ```
 
-### Example Rest Api Get By itemID Inventory
+### Example Rest Api PUT By itemID Inventory
 ```
 {
     "code": 200,
     "message": "Success get data inventory by item id",
-    "data": "1"
+    "data": "7"
 }{
-    "itemID": 1,
+    "itemID": 7,
     "name": "Asus Zenbook",
     "categoryItem": "Laptop",
     "stock": 110,
