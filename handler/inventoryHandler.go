@@ -21,10 +21,14 @@ func NewInventoryHandler(service service.InventoryService) *InventoryHandlers {
 
 }
 
-func (ch *InventoryHandlers) GetInventoryAll(c *gin.Context) {
+// func getCurrentMemberJWT(c *gin.Context) int {
+// 	currMember := c.MustGet("currentMember").(members.Member)
+// 	fmt.Println("currMember", currMember)
+// 	memberId := currMember.ID
+// 	return memberId
+// }
 
-	// /customers?status=xxxx
-	// status := c.Request.URL.Query().Get("status")
+func (ch *InventoryHandlers) GetInventoryAll(c *gin.Context) {
 	pagination := dto.GeneratePaginationRequest(c)
 	inventorys, err := ch.service.GetInventoryAll(*pagination)
 
@@ -32,8 +36,7 @@ func (ch *InventoryHandlers) GetInventoryAll(c *gin.Context) {
 		c.JSON(http.StatusBadRequest, nil)
 		return
 	} else {
-		// successMsg := fmt.Println("Success get all data inventory")
-		response := errs.SuccessRequest("Success get all data inventory")
+		response := errs.SuccessRequestUser("Success get all data inventory", inventorys)
 		c.JSON(http.StatusOK, response)
 	}
 
@@ -41,61 +44,55 @@ func (ch *InventoryHandlers) GetInventoryAll(c *gin.Context) {
 }
 
 func (ch *InventoryHandlers) GetInventoryByID(c *gin.Context) {
-	// /customers?status=xxxx
-	// status := c.Request.URL.Query().Get("status")
 	itemid := c.Param("itemid")
 	itemId, _ := strconv.Atoi(itemid)
 	inventorys, err := ch.service.GetInventoryByID(itemId)
 	if err != nil {
-		errsMessage := fmt.Sprintf("Failed get data inventory by item id %v invalid!", itemid)
+		errsMessage := fmt.Sprintf("Failed get data inventory by item id %v error!", itemid)
 		res := errs.NewBadRequestError(errsMessage)
 		c.JSON(http.StatusBadRequest, res)
 		return
 	} else {
-		successMsg := fmt.Sprintf("Success get data inventory by item id %v", itemid)
-		response := errs.SuccessRequest(successMsg)
+		response := errs.SuccessRequestUser("Success get data inventory by item id", itemid)
 		c.JSON(http.StatusOK, response)
 	}
 	c.JSON(http.StatusOK, inventorys)
 }
 
 func (ch *InventoryHandlers) DeleteInventory(c *gin.Context) {
-	// /customers?status=xxxx
-	// status := r.URL.Query().Get("status")
 	itemid := c.Param("itemid")
 	itemId, _ := strconv.Atoi(itemid)
-	inventorys, err := ch.service.DeleteInventory(itemId)
+	_, err := ch.service.DeleteInventory(itemId)
 	if err != nil {
-		errsMessage := fmt.Sprintf("Failed delete data inventory %v invalid!", itemid)
+		errsMessage := fmt.Sprintf("Failed delete data inventory %v error!", itemid)
 		res := errs.NewBadRequestError(errsMessage)
 		c.JSON(http.StatusBadRequest, res)
 		return
 	} else {
-		successMsg := fmt.Sprintf("Success delete data inventory %v", itemid)
-		response := errs.SuccessRequest(successMsg)
+		successMsg := fmt.Sprintf("Success delete data inventory by item id %v", itemId)
+		response := errs.SuccessRequestUser(successMsg, nil)
 		c.JSON(http.StatusOK, response)
 	}
-	c.JSON(http.StatusOK, inventorys)
+
 }
 
 func (ch *InventoryHandlers) CreateInventory(c *gin.Context) {
 	var input domain.CreateInventoryInput
-	// fmt.Println("tedy", input)
 	err := c.ShouldBindJSON(&input)
 	if err != nil {
-		// errorMessage := gin.H{"errors": err.Error()}
-		response := errs.NewBadRequestError("Failed create data inventory")
-		c.JSON(http.StatusUnprocessableEntity, response)
+		res := errs.NewBadRequestError("Failed create data inventory")
+		c.JSON(http.StatusBadRequest, res)
 		return
 	}
 	inventorys, errSer := ch.service.CreateInventory(input)
 	if errSer != nil {
-		response := errs.SuccessRequest("Success create data inventory")
-		c.JSON(http.StatusOK, response)
+		response := errs.NewBadRequestError("Failed create data inventory")
+		c.JSON(http.StatusBadRequest, response)
 		return
 	}
-	// response := errs.NewValidationError("Your Food has been created")
-	c.JSON(http.StatusOK, inventorys)
+	errsMessage := "Success create data inventory"
+	response := errs.SuccessRequestUser(errsMessage, inventorys)
+	c.JSON(http.StatusCreated, response)
 }
 
 func (ch *InventoryHandlers) UpdateInventory(c *gin.Context) {
@@ -106,23 +103,14 @@ func (ch *InventoryHandlers) UpdateInventory(c *gin.Context) {
 	err := c.ShouldBindJSON(&input)
 	inventorys, _ := ch.service.UpdateInventory(itemId, input)
 	if err != nil {
-		errsMessage := fmt.Sprintf("Failed update data inventory %v invalid!", itemid)
-		res := errs.NewBadRequestError(errsMessage)
+		errMessage := fmt.Sprintf("Failed update data inventory %v error!", itemid)
+		res := errs.NewBadRequestError(errMessage)
 		c.JSON(http.StatusBadRequest, res)
 		return
 	} else {
-		successMsg := fmt.Sprintf("Success update data inventory %v", itemid)
-		response := errs.SuccessRequest(successMsg)
+		inventorys.ID = itemId
+		successMsg := fmt.Sprintf("Success update data inventory by item id %v", itemId)
+		response := errs.SuccessRequestUser(successMsg, inventorys)
 		c.JSON(http.StatusOK, response)
 	}
-	c.JSON(http.StatusOK, inventorys)
 }
-
-// func writeResponse(w http.ResponseWriter, code int, data interface{}) {
-// 	w.Header().Add("Content-Type", "application/json")
-// 	w.WriteHeader(code)
-
-// 	if err := json.NewEncoder(w).Encode(data); err != nil {
-// 		panic(err)
-// 	}
-// }

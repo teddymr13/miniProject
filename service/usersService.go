@@ -46,6 +46,8 @@ func (u DefaultUsersService) CreateUsers(input domain.UsersInput) (domain.Users,
 }
 
 func (u DefaultUsersService) LoginUsers(input domain.Login) (domain.Users, *errs.AppErr) {
+	var users domain.Users
+	users.Email = input.Email
 	Email := input.Email
 	Password := input.Password
 
@@ -57,10 +59,10 @@ func (u DefaultUsersService) LoginUsers(input domain.Login) (domain.Users, *errs
 	if Email == "" {
 		return user, err
 	}
-
 	errByc := bcrypt.CompareHashAndPassword([]byte(user.Password), []byte(Password))
 	if errByc != nil {
-		return user, err
+		fmt.Println("tesy", errByc)
+		return users, errs.NewBadRequestError("wrong password email")
 	}
 
 	return user, nil
@@ -72,7 +74,7 @@ func (u DefaultUsersService) GetUsersByID(id int) (*domain.Users, *errs.AppErr) 
 		return users, err
 	}
 	if users.Email == "" {
-		return users, errs.NewBadRequestError("no member found on that email")
+		return users, errs.NewBadRequestError("no found on that email")
 	}
 	return users, nil
 }

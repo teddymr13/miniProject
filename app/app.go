@@ -42,11 +42,11 @@ func Start() {
 	//*membuat setup router dengan Gin
 	router := gin.Default()
 	//* router url crud
-	router.GET("/inventory", inventoryHandler.GetInventoryAll)
-	router.GET("/inventory/:itemid", inventoryHandler.GetInventoryByID)
-	router.POST("/inventory", inventoryHandler.CreateInventory)
-	router.PUT("/inventory/:itemid", inventoryHandler.UpdateInventory)
-	router.DELETE("/inventory/:itemid", inventoryHandler.DeleteInventory)
+	router.GET("/inventory", authMiddleware(authService, usersService), inventoryHandler.GetInventoryAll)
+	router.GET("/inventory/:itemid", authMiddleware(authService, usersService), inventoryHandler.GetInventoryByID)
+	router.POST("/inventory", authMiddleware(authService, usersService), inventoryHandler.CreateInventory)
+	router.PUT("/inventory/:itemid", authMiddleware(authService, usersService), inventoryHandler.UpdateInventory)
+	router.DELETE("/inventory/:itemid", authMiddleware(authService, usersService), inventoryHandler.DeleteInventory)
 
 	//* url router register and login
 	router.POST("/register", usersHandler.CreateUsers)

@@ -1,7 +1,6 @@
 package handler
 
 import (
-	"fmt"
 	"invertory/auth"
 	"invertory/domain"
 	"invertory/dto"
@@ -28,25 +27,33 @@ func (ch *UsersHandler) CreateUsers(c *gin.Context) {
 	err := c.ShouldBindJSON(&input)
 	users, _ := ch.service.CreateUsers(input)
 	if err != nil {
-		c.JSON(http.StatusBadRequest, nil)
+		res := errs.NewBadRequestError("Register failed")
+		c.JSON(http.StatusBadRequest, res)
 		return
 	}
 	token, err := ch.authService.GenerateToken(users.ID)
 	if err != nil {
-		c.JSON(http.StatusBadRequest, nil)
+		res := errs.NewBadRequestError("Register failed")
+		c.JSON(http.StatusBadRequest, res)
 		return
 	}
-	memberDTO := dto.FormatUsersResponse(users, token)
-	errsMessage := fmt.Sprintf("Register success%v!", memberDTO)
-	response := errs.SuccessRequest(errsMessage)
+	register := dto.FormatUsersResponse(users, token)
+	errsMessage := "Register Success"
+
+	response := errs.SuccessRequestUser(errsMessage, register)
 	c.JSON(http.StatusOK, response)
 }
 
 func (ch *UsersHandler) LoginUsers(c *gin.Context) {
 	var input domain.Login
 	err := c.ShouldBindJSON(&input)
-	users, _ := ch.service.LoginUsers(input)
 	if err != nil {
+		res := errs.NewBadRequestError("Login failed")
+		c.JSON(http.StatusUnprocessableEntity, res)
+		return
+	}
+	users, errUser := ch.service.LoginUsers(input)
+	if errUser != nil {
 		res := errs.NewBadRequestError("Login failed")
 		c.JSON(http.StatusBadRequest, res)
 		return
@@ -57,8 +64,9 @@ func (ch *UsersHandler) LoginUsers(c *gin.Context) {
 		c.JSON(http.StatusBadRequest, response)
 		return
 	}
-	memberDTO := dto.FormatUsersResponse(users, token)
+	login := dto.FormatUsersResponse(users, token)
 	errsMessage := "Login Success"
-	response := errs.SuccessRequestUser(errsMessage, memberDTO)
+
+	response := errs.SuccessRequestUser(errsMessage, login)
 	c.JSON(http.StatusOK, response)
 }

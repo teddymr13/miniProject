@@ -1,6 +1,7 @@
 package domain
 
 import (
+	"fmt"
 	"invertory/errs"
 	"invertory/logger"
 
@@ -33,6 +34,7 @@ func (u UsersRepositoryDB) LoginUsersInput(email string) (Users, *errs.AppErr) {
 		logger.Error("error to login user")
 		return users, errs.NewUnexpectedError("unexpected error")
 	}
+	fmt.Println("users", users)
 	return users, nil
 }
 

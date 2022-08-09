@@ -36,21 +36,3 @@ type Pagination struct {
 	TotalPages int         `json:"total_pages"`
 	Rows       interface{} `json:"rows"`
 }
-
-// func (c Inventory) convertStatusName() string {
-// 	statusName := "new"
-// 	if c.Status == "0" {
-// 		statusName = "used"
-// 	}
-// 	return statusName
-// }
-
-// func (c Inventory) ToDTO() dto.InventoryResponse {
-// 	return dto.InventoryResponse{
-// 		ID:           c.ID,
-// 		Name:         c.Name,
-// 		CategoryItem: c.CategoryItem,
-// 		Price:        c.Price,
-// 		Status:       c.convertStatusName(),
-// 	}
-// }
