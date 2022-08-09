@@ -41,6 +41,7 @@ func (s *InventoryRepositoryDB) FindInventoryAll(pagination Pagination) (Paginat
 	totalPages = int(math.Ceil(float64(totalRows)/float64(pagination.Limit))) - 1
 	pagination.TotalPages = totalPages
 	return pagination, nil
+
 }
 
 func (s *InventoryRepositoryDB) FindInventoryByID(id int) (*Inventory, *errs.AppErr) {

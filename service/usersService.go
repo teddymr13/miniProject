@@ -61,7 +61,6 @@ func (u DefaultUsersService) LoginUsers(input domain.Login) (domain.Users, *errs
 	}
 	errByc := bcrypt.CompareHashAndPassword([]byte(user.Password), []byte(Password))
 	if errByc != nil {
-		fmt.Println("tesy", errByc)
 		return users, errs.NewBadRequestError("wrong password email")
 	}
 
