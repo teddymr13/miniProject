@@ -173,3 +173,48 @@ localhost:9000/inventory/1
     "status": "1"
 }
 ```
+
+### PUT Inventory
+```
+localhost:9000/inventory/1
+```
+### Example Body PUT Inventory
+```
+{
+    "name": "Asus Zenbook",
+    "categoryItem": "Laptop",
+    "stock": 110,
+    "price": 9000,
+    "status": "1"
+}
+```
+
+### Example Rest Api Get By itemID Inventory
+```
+{
+    "code": 200,
+    "message": "Success get data inventory by item id",
+    "data": "1"
+}{
+    "itemID": 1,
+    "name": "Asus Zenbook",
+    "categoryItem": "Laptop",
+    "stock": 110,
+    "price": 9000,
+    "status": "1"
+}
+```
+
+### DELETE Inventory
+```
+localhost:9000/inventory/6
+```
+### Example Rest Api Get By itemID Inventory
+```
+{
+    "code": 200,
+    "message": "Success delete data inventory by item id 6",
+    "data": null
+}
+```
+
