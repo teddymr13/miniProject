@@ -90,11 +90,46 @@ VALUES
 ```
 
 ## Rest Api Inventory
-### Get Inventory
+### Get All Inventory
 ```
-localhost:9000/inventory?page=1&limit=3
+localhost:9000/inventory?page=1&limit=4
 ```
-### Example Rest Api Get Inventory
+### Example Rest Api Get All Inventory
 ```
-localhost:9000/inventory?page=1&limit=3
+{
+    "code": 200,
+    "message": "Success get all data inventory",
+    "data": {
+        "limit": 3,
+        "page": 1,
+        "total_rows": 6,
+        "total_pages": 1,
+        "rows": [
+            {
+                "itemID": 4,
+                "name": "Corsair ssd 225Gb",
+                "categoryItem": "Ram",
+                "stock": 100,
+                "price": 7000,
+                "status": "1"
+            },
+            {
+                "itemID": 5,
+                "name": "vGen ssd 225Gb",
+                "categoryItem": "Ram",
+                "stock": 100,
+                "price": 5000,
+                "status": "1"
+            },
+            {
+                "itemID": 6,
+                "name": "Kingston ssd 225Gb",
+                "categoryItem": "Ram",
+                "stock": 100,
+                "price": 4000,
+                "status": "1"
+            }
+        ]
+    }
+}
 ```
