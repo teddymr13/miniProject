@@ -82,7 +82,10 @@ INSERT INTO "inventories" (name, category_item, stock, price, status)
 VALUES
    ('Asus Zenbook','Laptop',100,9000,1),
    ('Acer Swift','Laptop',100,7000,1),
-   ('Lenovo IdeaPad','Laptop',100,6000,1);
+   ('Lenovo IdeaPad','Laptop',100,6000,1),
+   ('Corsair ssd 225Gb','Ram',100,7000,1),
+   ('vGen ssd 225Gb','Ram',100,5000,1),
+   ('Kingston ssd 225Gb','Ram',100,4000,1);
    
 ```
 
