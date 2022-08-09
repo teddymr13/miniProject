@@ -90,7 +90,7 @@ VALUES
 ```
 
 ## Rest Api Inventory
-### Get All Inventory
+### GET All Inventory
 ```
 localhost:9000/inventory?page=1&limit=4
 ```
@@ -131,5 +131,45 @@ localhost:9000/inventory?page=1&limit=4
             }
         ]
     }
+}
+```
+
+### GET By itemID Inventory
+```
+localhost:9000/inventory/1
+```
+### Example Rest Api Get By itemID Inventory
+```
+{
+    "code": 200,
+    "message": "Success get data inventory by item id",
+    "data": "1"
+}{
+    "itemID": 1,
+    "name": "Asus Zenbook",
+    "categoryItem": "Laptop",
+    "stock": 100,
+    "price": 9000,
+    "status": "1"
+}
+```
+
+### PUT Inventory
+```
+localhost:9000/inventory/1
+```
+### Example Rest Api Get By itemID Inventory
+```
+{
+    "code": 200,
+    "message": "Success get data inventory by item id",
+    "data": "1"
+}{
+    "itemID": 1,
+    "name": "Asus Zenbook",
+    "categoryItem": "Laptop",
+    "stock": 110,
+    "price": 9000,
+    "status": "1"
 }
 ```
