@@ -21,13 +21,6 @@ func NewInventoryHandler(service service.InventoryService) *InventoryHandlers {
 
 }
 
-// func getCurrentMemberJWT(c *gin.Context) int {
-// 	currMember := c.MustGet("currentMember").(members.Member)
-// 	fmt.Println("currMember", currMember)
-// 	memberId := currMember.ID
-// 	return memberId
-// }
-
 func (ch *InventoryHandlers) GetInventoryAll(c *gin.Context) {
 	pagination := dto.GeneratePaginationRequest(c)
 	inventorys, err := ch.service.GetInventoryAll(*pagination)
