@@ -123,43 +123,51 @@ localhost:9000/inventory
 }
 ```
 
-### GET All Inventory (READ) 
+### GET All Inventory with Pagination (READ) 
 ```
-localhost:9000/inventory?page=1&limit=4
+localhost:9000/inventory?page=0&limit=4
 ```
-### Example Rest Api Get All Inventory
+### Example Rest Api Get All Inventory with Pagination
 ```
 {
     "code": 200,
     "message": "Success get all data inventory",
     "data": {
-        "limit": 3,
-        "page": 1,
-        "total_rows": 6,
+        "limit": 4,
+        "page": 0,
+        "total_rows": 7,
         "total_pages": 1,
         "rows": [
+            {
+                "itemID": 1,
+                "name": "Asus Zenbook",
+                "categoryItem": "Laptop",
+                "stock": 100,
+                "price": 9000,
+                "status": "1"
+            },
+            {
+                "itemID": 2,
+                "name": "Acer Swift",
+                "categoryItem": "Laptop",
+                "stock": 100,
+                "price": 7000,
+                "status": "1"
+            },
+            {
+                "itemID": 3,
+                "name": "Lenovo IdeaPad",
+                "categoryItem": "Laptop",
+                "stock": 100,
+                "price": 6000,
+                "status": "1"
+            },
             {
                 "itemID": 4,
                 "name": "Corsair ssd 225Gb",
                 "categoryItem": "Ram",
                 "stock": 100,
                 "price": 7000,
-                "status": "1"
-            },
-            {
-                "itemID": 5,
-                "name": "vGen ssd 225Gb",
-                "categoryItem": "Ram",
-                "stock": 100,
-                "price": 5000,
-                "status": "1"
-            },
-            {
-                "itemID": 6,
-                "name": "Kingston ssd 225Gb",
-                "categoryItem": "Ram",
-                "stock": 100,
-                "price": 4000,
                 "status": "1"
             }
         ]
