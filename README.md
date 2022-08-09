@@ -63,8 +63,8 @@ CREATE TABLE "users" (
 
 INSERT INTO "users" (email, password, role, created_at)
 VALUES
-	('celerate12@gmail.com','abc123','admin',2020-08-09 10:27:22.000),
-	('test13@gmail.com','abc123','user',2020-08-09 10:27:22.000);
+	('test1@gmail.com','abc123','admin',2022-08-09 14:07:12.497),
+	('testUser@gmail.com','abc123','user',2022-08-09 14:07:12.497);
 ```
 
 ### Table Inventories
@@ -90,7 +90,6 @@ VALUES
 ```
 
 ## Rest Api Inventory
-
 
 ### POST Inventory
 ```
@@ -251,6 +250,59 @@ localhost:9000/inventory/6
     "code": 200,
     "message": "Success delete data inventory by item id 6",
     "data": null
+}
+```
+
+### Register
+```
+localhost:9000/register
+```
+### Example Body Register
+```
+{
+    "email": "test1@gmail.com",
+    "password": "abc123",
+    "role": "admin"
+}
+```
+
+### Example Rest Api Register
+```
+{
+    "code": 200,
+    "message": "Register Success",
+    "data": {
+        "id": 1,
+        "email": "test1@gmail.com",
+        "role": "admin",
+        "token": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyX2lkIjo3fQ._aC0pIGssTV5v-H6BQnd9oC-znivHJNBfwwt7cerHDo"
+    }
+}
+```
+
+### Login
+```
+localhost:9000/login
+```
+### Example Body PUT Inventory
+```
+{
+   "email": "test1@gmail.com",
+   "password": "abc123"
+}
+```
+
+### Example Rest Api Login
+```
+{
+    "code": 200,
+    "message": "Login Success",
+    "data": {
+        "id": 1,
+        "email": "test1@gmail.com",
+        "role": "admin",
+        "token": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyX2lkIjo3fQ._aC0pIGssTV5v-H6BQnd9oC-znivHJNBfwwt7cerHDo"
+    }
 }
 ```
 
