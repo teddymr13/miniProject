@@ -80,9 +80,9 @@ CREATE TABLE "inventories" (
 
 INSERT INTO "inventories" (name, category_item, stock, price, status)
 VALUES
-	 ('Asus Zenbook','Laptop',100,9000,1),
+   ('Asus Zenbook','Laptop',100,9000,1),
    ('Acer Swift','Laptop',100,7000,1),
-	 ('Lenovo IdeaPad','Laptop',100,6000,1);
+   ('Lenovo IdeaPad','Laptop',100,6000,1);
    
 ```
 
