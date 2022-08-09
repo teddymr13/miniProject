@@ -90,6 +90,42 @@ VALUES
 ```
 
 ## Rest Api Inventory
+
+
+### POST Inventory
+```
+/api/v1/inventory/6
+```
+
+### BODY POST FOODS
+```
+{
+    "name": "Keyboard Logitech",
+    "categoryItem": "Keyboard",
+    "stock": 10,
+    "price": 10000,
+    "status": "1"
+}
+```
+
+### EXAMPLE Rest Api Create POST Inventory 
+```
+{
+    "meta": {
+        "message": "Your Food has been created",
+        "code": 200,
+        "status": "success"
+    },
+    "data": {
+        "food_id": 5,
+        "food_name": "test oreo lll",
+        "food_price": 6000,
+        "food_stock": 40,
+        "food_status": "1"
+    }
+}
+```
+
 ### GET All Inventory
 ```
 localhost:9000/inventory?page=1&limit=4
