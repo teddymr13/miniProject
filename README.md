@@ -7,7 +7,7 @@
 - JWT Token
 - Hexagonal architecture
 
-### Struktur project Hexagonal architecture inventory 
+### Structure File Project Hexagonal Architecture Inventory 
 ```
 Mini Project    
 │
@@ -50,6 +50,11 @@ Mini Project
 
 ## Postgre SQL
 Create SQL used in this project
+
+### Database Name
+```sql
+miniproject
+```
 
 ### Table Users
 ```sql
